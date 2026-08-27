@@ -1,0 +1,69 @@
+version: 1
+project:
+  name: powerbi-CR-Approval-Reporting
+  domain: change-request-approval-reporting
+  objective: >-
+    Deliver a maintainable Power BI reporting solution that tracks change-request approval
+    throughput, SLA attainment, bottlenecks, and decision-oriented risk signals.
+
+report:
+  canonical_name: CR Approval Reporting
+  audience:
+    - executive_leadership
+    - change_management
+    - approval_owners
+  decision_focus:
+    - sla_health
+    - bottleneck_detection
+    - risk_escalation
+
+data_contract:
+  entities:
+    - name: change_request
+      keys: [cr_id]
+      required_fields:
+        - cr_id
+        - created_at
+        - submitted_at
+        - approved_at
+        - status
+        - priority
+        - risk_level
+        - request_type
+        - requesting_team
+    - name: approval_event
+      keys: [event_id]
+      required_fields:
+        - event_id
+        - cr_id
+        - approver
+        - event_type
+        - event_at
+
+kpis:
+  - name: cr_submitted
+    description: Distinct CR count with submitted timestamp.
+  - name: cr_approved
+    description: Distinct CR count in approved states.
+  - name: approval_rate
+    description: cr_approved / cr_submitted
+  - name: median_approval_time
+    description: Median(approved_at - submitted_at) for approved CRs.
+  - name: sla_attainment_pct
+    description: Percent of approved CRs meeting SLA threshold.
+  - name: aged_pending_count
+    description: Pending CRs above aging threshold.
+
+pages:
+  - overview
+  - bottleneck_analysis
+  - risk_and_exceptions
+
+copilot_guidance:
+  principles:
+    - Keep logic simple and explicit.
+    - Favor reusable measures over visual-specific calculations.
+    - Keep naming business-readable.
+    - Update this spec for every KPI definition change.
+  prompts_reference:
+    - /powerbi-authoring/prompts/report-context.md
