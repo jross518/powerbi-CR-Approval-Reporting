@@ -35,7 +35,7 @@ To finalize implementation details, confirm these items:
 
 ## Quick Start (VS Code + Copilot)
 1. Open this repository in VS Code.
-2. Install the required `/powerbi-authoring` plugin/extension in your environment.
+2. Install the **Power BI extension for VS Code** and your organization's **`/powerbi-authoring` plugin/extension** in your environment.
 3. Review:
    - `/docs/report-spec.md`
    - `/powerbi-authoring/copilot-spec.yaml`
